@@ -1764,6 +1764,12 @@ class ProjectPipelineManager(RetrieveMixin, CreateMixin, RESTManager):
         return CreateMixin.create(self, data, path=path, **kwargs)
 
 
+class ProjectPipelineSchedulesManager(RetrieveMixin, RESTManager):
+    _path = '/projects/%(project_id)s/pipeline_schedules'
+    _obj_cls = ProjectPipeline
+    _from_parent_attrs = {'project_id': 'id'}
+
+
 class ProjectSnippetNote(SaveMixin, ObjectDeleteMixin, RESTObject):
     pass
 
@@ -2034,6 +2040,7 @@ class Project(SaveMixin, ObjectDeleteMixin, RESTObject):
         ('notes', 'ProjectNoteManager'),
         ('notificationsettings', 'ProjectNotificationSettingsManager'),
         ('pipelines', 'ProjectPipelineManager'),
+        ('pipeline_schedules', 'ProjectPipelineSchedulesManager'),
         ('protectedbranches', 'ProjectProtectedBranchManager'),
         ('runners', 'ProjectRunnerManager'),
         ('services', 'ProjectServiceManager'),
